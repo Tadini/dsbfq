@@ -13,10 +13,26 @@
 <script>
 
 </script>
-<style lang="stylus" scoped>
-  .page-wrapper
-    width: 100%
-    max-width: 540px /*no*/
-    margin: 0 auto
-    background: #fff
+<style lang="scss" scoped>
+  .page-wrapper {
+    width: 100%;
+    max-width: 540px; /*no*/
+    margin: 0 auto;
+    background: #fff;
+  }
+  .page-header{
+    .title {
+      text-align: center;
+      font-size: 28px;
+      color: #333333;
+      line-height: 60px;
+      padding: 20px 15px;
+    }
+    .desc{
+      font-size: 26px;
+      color: #333333;
+      line-height: 1.4;
+      padding: 0 20px;
+    }
+  }
 </style>
