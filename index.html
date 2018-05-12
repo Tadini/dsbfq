@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>dsplayer</title>
+    <!-- 防止页面缓存 -->
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="pragma" content="no-cache">
+    <script>
+      !function (e) {
+        var t = e.document, n = t.documentElement,
+          i = "orientationchange" in e ? "orientationchange" : "resize",
+          a = function e() {
+            var t = n.getBoundingClientRect().width
+              ;
+            return n.style.fontSize = 5 * Math.max(Math.min(t / 750 * 20, 11.2), 8.55) + "px", e
+          }();
+        n.setAttribute("data-dpr", e.navigator.appVersion.match(/iphone/gi) ? e.devicePixelRatio : 1), /iP(hone|od|ad)/.test(e.navigator.userAgent) && (t.documentElement.classList.add("ios"), parseInt(e.navigator.appVersion.match(/OS (\d+)_(\d+)_?(\d+)?/)[1], 10) >= 8 && t.documentElement.classList.add("hairline")), t.addEventListener && (e.addEventListener(i, a, !1), t.addEventListener("DOMContentLoaded", a, !1))
+      }(window);
+      //缩放字体
+      ; (function () {
+        if (typeof WeixinJSBridge == "object" && typeof WeixinJSBridge.invoke == "function") {
+          handleFontSize();
+        } else {
+          if (document.addEventListener) {
+            document.addEventListener("WeixinJSBridgeReady", handleFontSize, false);
+          } else if (document.attachEvent) {
+            document.attachEvent("WeixinJSBridgeReady", handleFontSize);
+            document.attachEvent("onWeixinJSBridgeReady", handleFontSize);
+          }
+        }
+
+        function handleFontSize() {
+          // 初始化字体
+          WeixinJSBridge.invoke('setFontSizeCallback', {
+            'fontSize': 0
+          });
+          // 初始化字体
+          WeixinJSBridge.on('menu:setfont', function () {
+            WeixinJSBridge.invoke('setFontSizeCallback', {
+              'fontSize': 0
+            });
+          });
+        }
+        // 设置pad
+        function setViewport() {
+          var ua = window.navigator.userAgent;
+          var cw = document.documentElement.clientWidth;
+          var cmax = Math.max(document.documentElement.clientWidth, document.documentElement.clientHeight);
+          var cmin = Math.min(document.documentElement.clientWidth, document.documentElement.clientHeight);
+          var cval = (cmax - cmin) / 2 + cmin;
+          var ratio = 1;
+          if ((/ipad/i.test(ua) || /android/i.test(ua)) && cw > 765) {
+            ratio = cval / 640;
+            document.querySelector('[name="viewport"]').setAttribute('content', 'initial-scale=' + ratio + ', maximum-scale=' + ratio + ', user-scalable=no, width=320')
+          }
+        }
+
+        setViewport();
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
+    <!-- built files will be auto injected -->
+  </body>
+</html>
